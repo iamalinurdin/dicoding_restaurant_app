@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:restaurant_app/data/http/api_service.dart';
 import 'package:restaurant_app/data/models/restaurant_list.dart';
 import 'package:restaurant_app/data/models/restaurant_list_response.dart';
+import 'package:restaurant_app/screens/detail/restaurant_detail_screen.dart';
 import 'package:restaurant_app/ui/sliver_header_delegate.dart';
 
 void main() {
@@ -67,6 +68,8 @@ class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      initialRoute: '/detail',
+      routes: {'/detail': (context) => RestaurantDetailScreen()},
       home: Scaffold(
         body: CustomScrollView(
           slivers: [
