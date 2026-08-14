@@ -32,7 +32,9 @@ class MainApp extends StatelessWidget {
       initialRoute: '/main',
       routes: {
         '/main': (context) => MainScreen(),
-        '/detail': (context) => DetailScreen(),
+        '/detail': (context) => DetailScreen(
+          restaurantId: ModalRoute.of(context)?.settings.arguments as String,
+        ),
       },
     );
   }

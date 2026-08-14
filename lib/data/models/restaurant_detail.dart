@@ -1,3 +1,7 @@
+import 'package:restaurant_app/data/models/category.dart';
+import 'package:restaurant_app/data/models/customer_review.dart';
+import 'package:restaurant_app/data/models/menu.dart';
+
 class RestaurantDetail {
   final String id;
   final String name;
@@ -5,36 +9,40 @@ class RestaurantDetail {
   final String city;
   final String address;
   final String pictureId;
-  final List<Map<String, String>> categories;
-  final Map<String, List<Map<String, String>>> menus;
+  final List<Category> categories;
+  final Menus menus;
   final double rating;
-  final List<Map<String, String>> customerReviews;
+  final List<CustomerReview> customerReviews;
 
   RestaurantDetail({
-    required this.address,
-    required this.categories,
-    required this.city,
-    required this.customerReviews,
-    required this.description,
     required this.id,
-    required this.menus,
     required this.name,
+    required this.description,
+    required this.city,
+    required this.address,
     required this.pictureId,
+    required this.categories,
+    required this.menus,
     required this.rating,
+    required this.customerReviews,
   });
 
   factory RestaurantDetail.fromJson(Map<String, dynamic> json) {
     return RestaurantDetail(
-      address: json['address'],
-      categories: json['categories'],
-      city: json['city'],
-      customerReviews: json['customerReviews'],
-      description: json['description'],
       id: json['id'],
-      menus: json['menus'],
       name: json['name'],
+      description: json['description'],
+      city: json['city'],
+      address: json['address'],
       pictureId: json['pictureId'],
-      rating: json['rating'],
+      categories: (json['categories'] as List)
+          .map((category) => Category.fromJson(category))
+          .toList(),
+      menus: Menus.fromJson(json['menus']),
+      rating: (json['rating'] as num).toDouble(),
+      customerReviews: (json['customerReviews'] as List)
+          .map((review) => CustomerReview.fromJson(review))
+          .toList(),
     );
   }
 }

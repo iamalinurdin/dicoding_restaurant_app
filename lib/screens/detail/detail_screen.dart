@@ -3,7 +3,9 @@ import 'package:restaurant_app/data/http/api_service.dart';
 import 'package:restaurant_app/data/models/restaurant_detail_response.dart';
 
 class DetailScreen extends StatefulWidget {
-  const DetailScreen({super.key});
+  const DetailScreen({super.key, required this.restaurantId});
+
+  final String restaurantId;
 
   @override
   State<DetailScreen> createState() => _DetailScreenState();
@@ -17,7 +19,7 @@ class _DetailScreenState extends State<DetailScreen> {
     // TODO: implement initState
     super.initState();
     _restaurantDetailResponse = ApiService().getRestaurantsDetail(
-      'rqdv5juczeskfw1e867',
+      widget.restaurantId,
     );
   }
 
@@ -55,7 +57,9 @@ class _DetailScreenState extends State<DetailScreen> {
                         left: 20,
 
                         child: IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
                           icon: Icon(Icons.arrow_back, color: Colors.white),
                         ),
                       ),
@@ -98,7 +102,8 @@ class _DetailScreenState extends State<DetailScreen> {
                         SizedBox(height: 4),
                         Text(
                           restaurant.description,
-                          style: Theme.of(context).textTheme.labelMedium,
+                          style: Theme.of(context).textTheme.labelMedium!
+                              .copyWith(color: Colors.black, fontWeight: .w500),
                         ),
                       ],
                     ),

@@ -100,7 +100,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         return RestaurantItemList(
                           restaurant: restaurants[index],
                           onTap: () {
-                            Navigator.pushNamed(context, '/detail');
+                            Navigator.pushNamed(
+                              context,
+                              '/detail',
+                              arguments: restaurants[index].id,
+                            );
                           },
                         );
                       },
