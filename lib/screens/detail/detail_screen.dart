@@ -70,51 +70,69 @@ class _DetailScreenState extends State<DetailScreen> {
                     Column(
                       crossAxisAlignment: .start,
                       children: [
-                        Row(
-                          mainAxisAlignment: .spaceBetween,
-                          crossAxisAlignment: .center,
-                          children: [
-                            Text(
-                              restaurant.name,
-                              style: Theme.of(context).textTheme.titleLarge!
-                                  .copyWith(fontWeight: .w600),
-                            ),
-                            Row(
-                              children: [
-                                Icon(Icons.star, size: 14),
-                                Text(restaurant.rating.toString()),
-                              ],
-                            ),
-                          ],
+                        Padding(
+                          padding: .only(left: 12, right: 12, top: 20),
+                          child: Row(
+                            mainAxisAlignment: .spaceBetween,
+                            crossAxisAlignment: .center,
+                            children: [
+                              Text(
+                                restaurant.name,
+                                style: Theme.of(context).textTheme.titleLarge!
+                                    .copyWith(fontWeight: .w600),
+                              ),
+                              Row(
+                                children: [
+                                  Icon(Icons.star, size: 14),
+                                  Text(restaurant.rating.toString()),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                         SizedBox(height: 12),
-                        Row(
-                          children: [
-                            Icon(Icons.location_pin, size: 16),
-                            Text(restaurant.address),
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          child: Row(
+                            children: [
+                              Icon(Icons.location_pin, size: 16),
+                              Text(restaurant.address),
+                            ],
+                          ),
                         ),
                         SizedBox(height: 12),
-                        Text(
-                          'Description',
-                          style: Theme.of(
-                            context,
-                          ).textTheme.titleMedium!.copyWith(fontWeight: .w500),
-                        ),
-                        SizedBox(height: 4),
-                        Text(
-                          restaurant.description,
-                          style: Theme.of(context).textTheme.labelMedium!
-                              .copyWith(color: Colors.black, fontWeight: .w400),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          child: Column(
+                            crossAxisAlignment: .start,
+                            children: [
+                              Text(
+                                'Description',
+                                style: Theme.of(context).textTheme.titleMedium!
+                                    .copyWith(fontWeight: .w500),
+                              ),
+                              SizedBox(height: 4),
+                              Text(
+                                restaurant.description,
+                                style: Theme.of(context).textTheme.labelMedium!
+                                    .copyWith(
+                                      color: Colors.black,
+                                      fontWeight: .w400,
+                                    ),
+                              ),
+                            ],
+                          ),
                         ),
                         SizedBox(height: 12),
                         MenusListView(restaurant: restaurant),
                         SizedBox(height: 12),
-                        Text(
-                          'Review',
-                          style: Theme.of(
-                            context,
-                          ).textTheme.titleMedium!.copyWith(fontWeight: .w500),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          child: Text(
+                            'Review',
+                            style: Theme.of(context).textTheme.titleMedium!
+                                .copyWith(fontWeight: .w500),
+                          ),
                         ),
                         SizedBox(
                           height: 100,
@@ -209,11 +227,14 @@ class MenusListView extends StatelessWidget {
     return Column(
       crossAxisAlignment: .start,
       children: [
-        Text(
-          'Foods',
-          style: Theme.of(
-            context,
-          ).textTheme.titleMedium!.copyWith(fontWeight: .w500),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: Text(
+            'Foods',
+            style: Theme.of(
+              context,
+            ).textTheme.titleMedium!.copyWith(fontWeight: .w500),
+          ),
         ),
         SizedBox(height: 4),
         SizedBox(
@@ -224,6 +245,7 @@ class MenusListView extends StatelessWidget {
             separatorBuilder: (context, index) {
               return const SizedBox(width: 12);
             },
+
             itemBuilder: (context, index) {
               return SizedBox(
                 width: 200,
@@ -250,11 +272,14 @@ class MenusListView extends StatelessWidget {
           ),
         ),
         SizedBox(height: 12),
-        Text(
-          'Drinks',
-          style: Theme.of(
-            context,
-          ).textTheme.titleMedium!.copyWith(fontWeight: .w500),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: Text(
+            'Drinks',
+            style: Theme.of(
+              context,
+            ).textTheme.titleMedium!.copyWith(fontWeight: .w500),
+          ),
         ),
         SizedBox(height: 4),
         SizedBox(
