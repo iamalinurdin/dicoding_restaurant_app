@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:restaurant_app/data/http/api_service.dart';
 import 'package:restaurant_app/data/models/restaurant_detail_response.dart';
 
-class RestaurantDetailScreen extends StatefulWidget {
-  const RestaurantDetailScreen({super.key});
+class DetailScreen extends StatefulWidget {
+  const DetailScreen({super.key});
 
   @override
-  State<RestaurantDetailScreen> createState() => _RestaurantDetailScreenState();
+  State<DetailScreen> createState() => _DetailScreenState();
 }
 
-class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
+class _DetailScreenState extends State<DetailScreen> {
   late Future<RestaurantDetailResponse> _restaurantDetailResponse;
 
   @override
