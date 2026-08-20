@@ -96,7 +96,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           child: Row(
                             children: [
                               Icon(Icons.location_pin, size: 16),
-                              Text(restaurant.address),
+                              Text('${restaurant.address}, ${restaurant.city}'),
                             ],
                           ),
                         ),
@@ -137,6 +137,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         SizedBox(
                           height: 100,
                           child: ListView.separated(
+                            padding: .only(left: 12, right: 12),
                             scrollDirection: .horizontal,
                             itemCount: restaurant.customerReviews.length,
                             separatorBuilder: (context, index) {
@@ -241,6 +242,7 @@ class MenusListView extends StatelessWidget {
           height: 100,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
+            padding: .only(left: 12, right: 12),
             itemCount: restaurant.menus.foods.length,
             separatorBuilder: (context, index) {
               return const SizedBox(width: 12);
@@ -285,6 +287,7 @@ class MenusListView extends StatelessWidget {
         SizedBox(
           height: 100,
           child: ListView.separated(
+            padding: .only(left: 12, right: 12),
             scrollDirection: Axis.horizontal,
             itemCount: restaurant.menus.drinks.length,
             separatorBuilder: (context, index) {
