@@ -35,7 +35,34 @@ class _DetailScreenState extends State<DetailScreen> {
               return Center(child: CircularProgressIndicator());
             case ConnectionState.done:
               if (snapshot.hasError) {
-                return Center(child: Text(snapshot.error.toString()));
+                return Expanded(
+                  child: Center(
+                    child: Column(
+                      crossAxisAlignment: .center,
+                      mainAxisAlignment: .center,
+                      mainAxisSize: .min,
+                      children: [
+                        Icon(Icons.wifi_off, size: 60),
+                        Text(
+                          'Ooooppppssss...',
+                          style: Theme.of(
+                            context,
+                          ).textTheme.titleLarge!.copyWith(fontWeight: .w600),
+                        ),
+                        Text(
+                          'failed to get restaurants data.',
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text('back to home'),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
               }
 
               final restaurant = snapshot.data!.restaurant;

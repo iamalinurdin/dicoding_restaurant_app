@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return SliverPersistentHeader(
       pinned: true,
       delegate: SliverHeaderDelegate(
-        minHeight: 180,
+        minHeight: 150,
         maxHeight: 200,
         child: ClipRRect(
           borderRadius: BorderRadiusGeometry.only(
@@ -51,16 +51,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       context,
                     ).textTheme.titleSmall!.copyWith(fontWeight: .w600),
                   ),
-                  SizedBox(height: 30),
-                  TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      prefixIcon: Icon(Icons.search),
-                      hint: Text('Find your favorite restaurant'),
-                    ),
-                  ),
                 ],
               ),
             ),
@@ -73,49 +63,68 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            _header(context),
-            FutureBuilder<RestaurantListResponse>(
-              future: _restaurantListResponse,
-              builder: (context, snapshot) {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.waiting:
-                    return SliverToBoxAdapter(
-                      child: Center(child: CircularProgressIndicator()),
+      body: CustomScrollView(
+        slivers: [
+          _header(context),
+          FutureBuilder<RestaurantListResponse>(
+            future: _restaurantListResponse,
+            builder: (context, snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.waiting:
+                  return SliverToBoxAdapter(
+                    child: Center(child: CircularProgressIndicator()),
+                  );
+                case ConnectionState.done:
+                  if (snapshot.hasError) {
+                    return SliverFillRemaining(
+                      hasScrollBody: false,
+                      child: Expanded(
+                        child: Center(
+                          child: Column(
+                            crossAxisAlignment: .center,
+                            mainAxisAlignment: .center,
+                            mainAxisSize: .min,
+                            children: [
+                              Icon(Icons.wifi_off, size: 60),
+                              Text(
+                                'Ooooppppssss...',
+                                style: Theme.of(context).textTheme.titleLarge!
+                                    .copyWith(fontWeight: .w600),
+                              ),
+                              Text(
+                                'failed to get restaurants data.',
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     );
-                  case ConnectionState.done:
-                    if (snapshot.hasError) {
-                      return SliverToBoxAdapter(
-                        child: Center(child: Text(snapshot.error.toString())),
+                  }
+
+                  final restaurants = snapshot.data!.restaurants;
+
+                  return SliverList.builder(
+                    itemCount: restaurants.length,
+                    itemBuilder: (context, index) {
+                      return RestaurantItemList(
+                        restaurant: restaurants[index],
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            '/detail',
+                            arguments: restaurants[index].id,
+                          );
+                        },
                       );
-                    }
-
-                    final restaurants = snapshot.data!.restaurants;
-
-                    return SliverList.builder(
-                      itemCount: restaurants.length,
-                      itemBuilder: (context, index) {
-                        return RestaurantItemList(
-                          restaurant: restaurants[index],
-                          onTap: () {
-                            Navigator.pushNamed(
-                              context,
-                              '/detail',
-                              arguments: restaurants[index].id,
-                            );
-                          },
-                        );
-                      },
-                    );
-                  default:
-                    return SliverToBoxAdapter(child: SizedBox());
-                }
-              },
-            ),
-          ],
-        ),
+                    },
+                  );
+                default:
+                  return SliverToBoxAdapter(child: SizedBox());
+              }
+            },
+          ),
+        ],
       ),
     );
   }
