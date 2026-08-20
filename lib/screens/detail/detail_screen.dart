@@ -123,7 +123,6 @@ class _DetailScreenState extends State<DetailScreen> {
                                 restaurant.description,
                                 style: Theme.of(context).textTheme.labelMedium!
                                     .copyWith(
-                                      color: Colors.black,
                                       fontWeight: .w400,
                                       fontFamily: 'Roboto',
                                     ),
