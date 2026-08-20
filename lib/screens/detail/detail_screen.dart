@@ -79,7 +79,11 @@ class _DetailScreenState extends State<DetailScreen> {
                               Text(
                                 restaurant.name,
                                 style: Theme.of(context).textTheme.titleLarge!
-                                    .copyWith(fontWeight: .w600),
+                                    .copyWith(
+                                      fontWeight: .w600,
+                                      fontFamily: 'Montserrat',
+                                      fontSize: 30,
+                                    ),
                               ),
                               Row(
                                 children: [
@@ -109,7 +113,10 @@ class _DetailScreenState extends State<DetailScreen> {
                               Text(
                                 'Description',
                                 style: Theme.of(context).textTheme.titleMedium!
-                                    .copyWith(fontWeight: .w500),
+                                    .copyWith(
+                                      fontWeight: .w500,
+                                      fontFamily: 'Montserrat',
+                                    ),
                               ),
                               SizedBox(height: 4),
                               Text(
@@ -118,6 +125,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                     .copyWith(
                                       color: Colors.black,
                                       fontWeight: .w400,
+                                      fontFamily: 'Roboto',
                                     ),
                               ),
                             ],
@@ -131,7 +139,10 @@ class _DetailScreenState extends State<DetailScreen> {
                           child: Text(
                             'Review',
                             style: Theme.of(context).textTheme.titleMedium!
-                                .copyWith(fontWeight: .w500),
+                                .copyWith(
+                                  fontWeight: .w500,
+                                  fontFamily: 'Montserrat',
+                                ),
                           ),
                         ),
                         SizedBox(
@@ -232,9 +243,10 @@ class MenusListView extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Text(
             'Foods',
-            style: Theme.of(
-              context,
-            ).textTheme.titleMedium!.copyWith(fontWeight: .w500),
+            style: Theme.of(context).textTheme.titleMedium!.copyWith(
+              fontWeight: .w500,
+              fontFamily: 'Montserrat',
+            ),
           ),
         ),
         SizedBox(height: 4),
@@ -278,9 +290,10 @@ class MenusListView extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Text(
             'Drinks',
-            style: Theme.of(
-              context,
-            ).textTheme.titleMedium!.copyWith(fontWeight: .w500),
+            style: Theme.of(context).textTheme.titleMedium!.copyWith(
+              fontWeight: .w500,
+              fontFamily: 'Montserrat',
+            ),
           ),
         ),
         SizedBox(height: 4),
