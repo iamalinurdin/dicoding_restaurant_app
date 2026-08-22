@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:restaurant_app/data/http/api_service.dart';
 import 'package:restaurant_app/data/models/restaurant_detail.dart';
 import 'package:restaurant_app/data/models/restaurant_detail_response.dart';
+import 'package:restaurant_app/screens/detail/menu_item_list.dart';
+import 'package:restaurant_app/screens/detail/review_item.dart';
 
 class DetailScreen extends StatefulWidget {
   const DetailScreen({super.key, required this.restaurantId});
@@ -162,17 +164,25 @@ class _DetailScreenState extends State<DetailScreen> {
                         SizedBox(height: 12),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 12),
-                          child: Text(
-                            'Review',
-                            style: Theme.of(context).textTheme.titleMedium!
-                                .copyWith(
-                                  fontWeight: .w500,
-                                  fontFamily: 'Montserrat',
-                                ),
+                          child: Row(
+                            children: [
+                              Text(
+                                'Review',
+                                style: Theme.of(context).textTheme.titleMedium!
+                                    .copyWith(
+                                      fontWeight: .w500,
+                                      fontFamily: 'Montserrat',
+                                    ),
+                              ),
+                            ],
                           ),
                         ),
-                        SizedBox(
-                          height: 100,
+                        SizedBox(height: 8),
+                        ConstrainedBox(
+                          constraints: BoxConstraints(
+                            minWidth: 150,
+                            maxHeight: 160,
+                          ),
                           child: ListView.separated(
                             padding: .only(left: 12, right: 12),
                             scrollDirection: .horizontal,
@@ -181,63 +191,22 @@ class _DetailScreenState extends State<DetailScreen> {
                               return const SizedBox(width: 12);
                             },
                             itemBuilder: (context, index) {
-                              return ConstrainedBox(
-                                constraints: BoxConstraints(
-                                  maxWidth: 300,
-                                  maxHeight: 150,
-                                  minHeight: 150,
-                                  minWidth: 200,
-                                ),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: Colors.black87,
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      crossAxisAlignment: .start,
-                                      mainAxisAlignment: .spaceBetween,
-                                      children: [
-                                        Text(
-                                          restaurant
-                                              .customerReviews[index]
-                                              .review,
-                                          style: Theme.of(
-                                            context,
-                                          ).textTheme.titleMedium,
-                                          maxLines: 3,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment: .spaceBetween,
-                                          children: [
-                                            Text(
-                                              restaurant
-                                                  .customerReviews[index]
-                                                  .name,
-                                              style: Theme.of(
-                                                context,
-                                              ).textTheme.labelSmall,
-                                            ),
-                                            Text(
-                                              restaurant
-                                                  .customerReviews[index]
-                                                  .date,
-                                              style: Theme.of(
-                                                context,
-                                              ).textTheme.labelSmall,
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
+                              final review = restaurant.customerReviews[index];
+
+                              return ReviewItem(review: review);
+                            },
+                          ),
+                        ),
+                        Center(
+                          child: TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                context,
+                                '/add_review',
+                                arguments: restaurant,
                               );
                             },
+                            child: Text('Add Review'),
                           ),
                         ),
                         SizedBox(height: 50),
@@ -287,26 +256,11 @@ class MenusListView extends StatelessWidget {
             },
 
             itemBuilder: (context, index) {
-              return SizedBox(
-                width: 200,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      Image.asset('assets/images/foods.jpg', fit: BoxFit.cover),
-                      Positioned(
-                        bottom: 10,
-                        left: 8,
-                        child: Text(
-                          restaurant.menus.foods[index].name,
-                          style: Theme.of(context).textTheme.labelLarge!
-                              .copyWith(fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+              final menu = restaurant.menus.foods[index];
+
+              return MenuItemList(
+                menuItem: menu,
+                backgroundImage: 'assets/images/foods.jpg',
               );
             },
           ),
@@ -333,29 +287,10 @@ class MenusListView extends StatelessWidget {
               return const SizedBox(width: 12);
             },
             itemBuilder: (context, index) {
-              return SizedBox(
-                width: 200,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      Image.asset(
-                        'assets/images/drinks.jpg',
-                        fit: BoxFit.cover,
-                      ),
-                      Positioned(
-                        bottom: 10,
-                        left: 8,
-                        child: Text(
-                          restaurant.menus.drinks[index].name,
-                          style: Theme.of(context).textTheme.labelLarge!
-                              .copyWith(fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+              final menu = restaurant.menus.drinks[index];
+              return MenuItemList(
+                menuItem: menu,
+                backgroundImage: 'assets/images/drinks.jpg',
               );
             },
           ),

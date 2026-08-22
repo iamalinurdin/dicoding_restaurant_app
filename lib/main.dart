@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurant_app/data/models/restaurant_detail.dart';
 import 'package:restaurant_app/providers/main/index_nav_provider.dart';
 import 'package:restaurant_app/providers/main/theme_provider.dart';
+import 'package:restaurant_app/screens/add_review/add_review_screen.dart';
 import 'package:restaurant_app/screens/detail/detail_screen.dart';
 import 'package:restaurant_app/screens/main/main_screen.dart';
 import 'package:restaurant_app/style/theme/ui_theme.dart';
@@ -34,6 +36,10 @@ class MainApp extends StatelessWidget {
         '/main': (context) => MainScreen(),
         '/detail': (context) => DetailScreen(
           restaurantId: ModalRoute.of(context)?.settings.arguments as String,
+        ),
+        '/add_review': (context) => AddReviewScreen(
+          restaurant:
+              ModalRoute.of(context)?.settings.arguments as RestaurantDetail,
         ),
       },
     );
