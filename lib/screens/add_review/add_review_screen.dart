@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/data/http/api_service.dart';
 import 'package:restaurant_app/data/models/restaurant_detail.dart';
@@ -81,7 +83,9 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
 
                             if (!response.error) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('success')),
+                                SnackBar(
+                                  content: Text('success to add review'),
+                                ),
                               );
                             }
                           }
