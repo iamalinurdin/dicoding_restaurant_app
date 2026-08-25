@@ -114,7 +114,13 @@ class _DetailScreenState extends State<DetailScreen> {
                               Row(
                                 children: [
                                   Icon(Icons.star, size: 14),
-                                  Text(restaurant.rating.toString()),
+                                  Text(
+                                    restaurant.rating.toString(),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .copyWith(fontFamily: 'Roboto'),
+                                  ),
                                 ],
                               ),
                             ],
@@ -126,7 +132,11 @@ class _DetailScreenState extends State<DetailScreen> {
                           child: Row(
                             children: [
                               Icon(Icons.location_pin, size: 16),
-                              Text('${restaurant.address}, ${restaurant.city}'),
+                              Text(
+                                '${restaurant.address}, ${restaurant.city}',
+                                style: Theme.of(context).textTheme.labelLarge!
+                                    .copyWith(fontFamily: 'Roboto'),
+                              ),
                             ],
                           ),
                         ),

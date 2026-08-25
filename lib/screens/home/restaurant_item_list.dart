@@ -26,8 +26,8 @@ class RestaurantItemList extends StatelessWidget {
                 constraints: BoxConstraints(
                   minHeight: 80,
                   maxHeight: 80,
-                  minWidth: 160,
-                  maxWidth: 160,
+                  minWidth: 120,
+                  maxWidth: 120,
                 ),
                 child: Image.network(
                   "https://restaurant-api.dicoding.dev/images/small/${restaurant.pictureId}",
@@ -39,13 +39,23 @@ class RestaurantItemList extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: .start,
                 children: [
-                  Text(restaurant.name, style: TextStyle(fontWeight: .w600)),
+                  Text(
+                    restaurant.name,
+                    style: TextStyle(
+                      fontWeight: .w600,
+                      fontFamily: 'Montserrat',
+                      fontSize: 18,
+                    ),
+                  ),
                   Row(
                     crossAxisAlignment: .start,
                     spacing: 8,
                     children: [
                       Icon(Icons.location_pin, size: 16),
-                      Text(restaurant.city),
+                      Text(
+                        restaurant.city,
+                        style: TextStyle(fontFamily: 'Montserrat'),
+                      ),
                     ],
                   ),
                   Row(
@@ -53,7 +63,10 @@ class RestaurantItemList extends StatelessWidget {
                     spacing: 8,
                     children: [
                       Icon(Icons.star, size: 16),
-                      Text(restaurant.rating.toString()),
+                      Text(
+                        restaurant.rating.toString(),
+                        style: TextStyle(fontFamily: 'Montserrat'),
+                      ),
                     ],
                   ),
                 ],
