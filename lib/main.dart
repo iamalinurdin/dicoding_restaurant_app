@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurant_app/data/http/api_service.dart';
 import 'package:restaurant_app/data/models/restaurant_detail.dart';
+import 'package:restaurant_app/providers/detail/restaurant_detail_provider.dart';
+import 'package:restaurant_app/providers/home/restaurants_list_provider.dart';
 import 'package:restaurant_app/providers/main/index_nav_provider.dart';
 import 'package:restaurant_app/providers/main/theme_provider.dart';
 import 'package:restaurant_app/screens/add_review/add_review_screen.dart';
@@ -12,8 +15,17 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
+        Provider(create: (context) => ApiService()),
         ChangeNotifierProvider(create: (context) => IndexNavProvider()),
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
+        ChangeNotifierProvider(
+          create: (context) =>
+              RestaurantsListProvider(context.read<ApiService>()),
+        ),
+        ChangeNotifierProvider(
+          create: (context) =>
+              RestaurantDetailProvider(context.read<ApiService>()),
+        ),
       ],
       child: MainApp(),
     ),

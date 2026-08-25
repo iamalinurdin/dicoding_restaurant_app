@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/data/http/api_service.dart';
+import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/models/restaurant_detail.dart';
-import 'package:restaurant_app/data/models/restaurant_detail_response.dart';
+import 'package:restaurant_app/providers/detail/restaurant_detail_provider.dart';
 import 'package:restaurant_app/screens/detail/menu_item_list.dart';
 import 'package:restaurant_app/screens/detail/review_item.dart';
+import 'package:restaurant_app/static/restaurant_detail_result_state.dart';
 
 class DetailScreen extends StatefulWidget {
   const DetailScreen({super.key, required this.restaurantId});
@@ -15,61 +16,57 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
-  late Future<RestaurantDetailResponse> _restaurantDetailResponse;
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _restaurantDetailResponse = ApiService().getRestaurantsDetail(
-      widget.restaurantId,
-    );
+    Future.microtask(() {
+      context.read<RestaurantDetailProvider>().fetchRestaurantDetail(
+        widget.restaurantId,
+      );
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder(
-        future: _restaurantDetailResponse,
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-              return Center(child: CircularProgressIndicator());
-            case ConnectionState.done:
-              if (snapshot.hasError) {
-                return Expanded(
-                  child: Center(
-                    child: Column(
-                      crossAxisAlignment: .center,
-                      mainAxisAlignment: .center,
-                      mainAxisSize: .min,
-                      children: [
-                        Icon(Icons.wifi_off, size: 60),
-                        Text(
-                          'Ooooppppssss...',
-                          style: Theme.of(
-                            context,
-                          ).textTheme.titleLarge!.copyWith(fontWeight: .w600),
-                        ),
-                        Text(
-                          'failed to get restaurants data.',
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: Text('back to home'),
-                        ),
-                      ],
+      body: Consumer<RestaurantDetailProvider>(
+        // future: _restaurantDetailResponse,
+        builder: (context, value, child) {
+          return switch (value.resultState) {
+            RestaurantDetailLoadingState() => Center(
+              child: CircularProgressIndicator(),
+            ),
+            RestaurantDetailErrorState(error: var message) => Expanded(
+              child: Center(
+                child: Column(
+                  crossAxisAlignment: .center,
+                  mainAxisAlignment: .center,
+                  mainAxisSize: .min,
+                  children: [
+                    Icon(Icons.wifi_off, size: 60),
+                    Text(
+                      'Ooooppppssss...',
+                      style: Theme.of(
+                        context,
+                      ).textTheme.titleLarge!.copyWith(fontWeight: .w600),
                     ),
-                  ),
-                );
-              }
-
-              final restaurant = snapshot.data!.restaurant;
-
-              return SingleChildScrollView(
+                    Text(
+                      message,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text('back to home'),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            RestaurantDetailLoadedState(data: var restaurant) =>
+              SingleChildScrollView(
                 child: Column(
                   children: [
                     Stack(
@@ -214,10 +211,9 @@ class _DetailScreenState extends State<DetailScreen> {
                     ),
                   ],
                 ),
-              );
-            default:
-              return SizedBox();
-          }
+              ),
+            _ => SizedBox(),
+          };
         },
       ),
     );
