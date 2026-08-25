@@ -21,4 +21,13 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
-    - assets/fonts/
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Regular.ttf
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat-Regular.ttf
+    - family: GoogleSans
+      fonts:
+        - asset: assets/fonts/GoogleSans-Regular.ttf
