@@ -41,21 +41,14 @@ class RestaurantItemList extends StatelessWidget {
                 children: [
                   Text(
                     restaurant.name,
-                    style: TextStyle(
-                      fontWeight: .w600,
-                      fontFamily: 'Montserrat',
-                      fontSize: 18,
-                    ),
+                    style: TextStyle(fontWeight: .w600, fontSize: 18),
                   ),
                   Row(
                     crossAxisAlignment: .start,
                     spacing: 8,
                     children: [
                       Icon(Icons.location_pin, size: 16),
-                      Text(
-                        restaurant.city,
-                        style: TextStyle(fontFamily: 'Montserrat'),
-                      ),
+                      Text(restaurant.city),
                     ],
                   ),
                   Row(
@@ -63,10 +56,7 @@ class RestaurantItemList extends StatelessWidget {
                     spacing: 8,
                     children: [
                       Icon(Icons.star, size: 16),
-                      Text(
-                        restaurant.rating.toString(),
-                        style: TextStyle(fontFamily: 'Montserrat'),
-                      ),
+                      Text(restaurant.rating.toString()),
                     ],
                   ),
                 ],

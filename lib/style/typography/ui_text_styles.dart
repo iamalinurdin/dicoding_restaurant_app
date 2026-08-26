@@ -1,9 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 class UiTextStyles {
-  static const TextStyle _commonStyle = TextStyle(
-    fontFamily: 'IBMPlexSansCondensed',
-  );
+  static const TextStyle _commonStyle = TextStyle(fontFamily: 'GoogleSans');
 
   /// displayLarge Text Style
   static TextStyle displayLarge = _commonStyle.copyWith(

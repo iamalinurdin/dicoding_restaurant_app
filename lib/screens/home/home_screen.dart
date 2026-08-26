@@ -44,16 +44,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Text(
                     'Restaurant',
-                    style: Theme.of(
-                      context,
-                    ).textTheme.titleLarge!.copyWith(fontFamily: 'Montserrat'),
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                   Text(
                     'Recommendation restaurants for you.',
-                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                      fontWeight: .w600,
-                      fontFamily: 'Montserrat',
-                    ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.titleSmall!.copyWith(fontWeight: .w600),
                   ),
                 ],
               ),
@@ -106,15 +103,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             Text(
                               'Ooooppppssss...',
                               style: Theme.of(context).textTheme.titleLarge!
-                                  .copyWith(
-                                    fontWeight: .w600,
-                                    fontFamily: 'Montserrat',
-                                  ),
+                                  .copyWith(fontWeight: .w600),
                             ),
                             Text(
                               message,
-                              style: Theme.of(context).textTheme.titleMedium!
-                                  .copyWith(fontFamily: 'Montserrat'),
+                              style: Theme.of(context).textTheme.titleMedium!,
                             ),
                           ],
                         ),

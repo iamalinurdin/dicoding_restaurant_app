@@ -27,9 +27,7 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
             children: [
               Text(
                 'From ${widget.restaurant.name}: We hopefully fulfill your expectation with our foods, beverages and our service.',
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyLarge!.copyWith(fontFamily: 'Montserrat'),
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
               Form(
                 key: _formKey,

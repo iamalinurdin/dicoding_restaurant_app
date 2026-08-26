@@ -37,7 +37,6 @@ class MenuItemList extends StatelessWidget {
                 menuItem.name,
                 style: Theme.of(context).textTheme.labelLarge!.copyWith(
                   fontWeight: FontWeight.w600,
-                  fontFamily: 'Roboto',
                   color: Colors.white,
                 ),
               ),
