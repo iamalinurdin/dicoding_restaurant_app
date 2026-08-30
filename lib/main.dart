@@ -11,13 +11,17 @@ import 'package:restaurant_app/screens/detail/detail_screen.dart';
 import 'package:restaurant_app/screens/main/main_screen.dart';
 import 'package:restaurant_app/style/theme/ui_theme.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(
     MultiProvider(
       providers: [
         Provider(create: (context) => ApiService()),
         ChangeNotifierProvider(create: (context) => IndexNavProvider()),
-        ChangeNotifierProvider(create: (context) => ThemeProvider()),
+        ChangeNotifierProvider(
+          create: (context) => ThemeProvider()..loadTheme(),
+        ),
         ChangeNotifierProvider(
           create: (context) =>
               RestaurantsListProvider(context.read<ApiService>()),
@@ -40,9 +44,9 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       theme: UiTheme.lightTheme,
       darkTheme: UiTheme.darkTheme,
-      themeMode: context.watch<ThemeProvider>().isLightTheme
-          ? ThemeMode.light
-          : ThemeMode.dark,
+      themeMode: context.watch<ThemeProvider>().isDarkMode
+          ? ThemeMode.dark
+          : ThemeMode.light,
       initialRoute: '/main',
       routes: {
         '/main': (context) => MainScreen(),

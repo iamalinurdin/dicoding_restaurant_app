@@ -29,7 +29,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   ),
                   Switch(
                     // value: _isDarkMode,
-                    value: context.watch<ThemeProvider>().isLightTheme,
+                    value: context.watch<ThemeProvider>().isDarkMode,
                     onChanged: (value) {
                       // print(value);
                       // setState(() {
@@ -37,7 +37,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       // });
 
                       // print(_isDarkMode);
-                      context.read<ThemeProvider>().setIsLightTheme = value;
+                      context.read<ThemeProvider>().toggleTheme(value);
                     },
                   ),
                 ],
