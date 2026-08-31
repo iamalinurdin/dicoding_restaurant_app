@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:restaurant_app/providers/home/restaurants_list_provider.dart';
 import 'package:restaurant_app/screens/home/restaurant_item_list.dart';
 import 'package:restaurant_app/static/restaurant_list_result_state.dart';
-import 'package:restaurant_app/ui/sliver_header_delegate.dart';
+import 'package:restaurant_app/widgets/sliver_header.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -21,52 +21,12 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
-  SliverPersistentHeader _header(BuildContext context) {
-    final double sliverInitialHeight = 150;
-
-    return SliverPersistentHeader(
-      pinned: true,
-      delegate: SliverHeaderDelegate(
-        minHeight: sliverInitialHeight,
-        maxHeight: sliverInitialHeight + 50,
-        child: ClipRRect(
-          borderRadius: BorderRadiusGeometry.only(
-            bottomLeft: .circular(20),
-            bottomRight: .circular(20),
-          ),
-          child: Container(
-            color: Theme.of(context).colorScheme.primaryContainer,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 16, bottom: 24, right: 16),
-              child: Column(
-                mainAxisAlignment: .end,
-                crossAxisAlignment: .start,
-                children: [
-                  Text(
-                    'Restaurant',
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  Text(
-                    'Recommendation restaurants for you.',
-                    style: Theme.of(
-                      context,
-                    ).textTheme.titleSmall!.copyWith(fontWeight: .w600),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          _header(context),
+          SliverHeader(),
           Consumer<RestaurantsListProvider>(
             builder: (context, value, child) {
               return switch (value.resultState) {
