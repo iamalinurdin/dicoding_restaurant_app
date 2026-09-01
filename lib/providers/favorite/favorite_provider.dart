@@ -46,6 +46,7 @@ class FavoriteProvider extends ChangeNotifier {
     try {
       await _service.removeItem(id);
       _message = 'your favorite is removed';
+      _favorites = await _service.getAllItems();
       notifyListeners();
     } catch (e) {
       _message = 'error: ${e.toString()}';
