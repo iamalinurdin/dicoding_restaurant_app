@@ -108,6 +108,32 @@ class _DetailScreenState extends State<DetailScreen> {
                                 style: Theme.of(context).textTheme.titleLarge!
                                     .copyWith(fontWeight: .w600, fontSize: 30),
                               ),
+                              IconButton.outlined(
+                                onPressed: () {},
+                                icon: Icon(Icons.favorite),
+                                iconSize: 20,
+                                padding: .all(8),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 12),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          child: Row(
+                            mainAxisAlignment: .spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(Icons.location_pin, size: 16),
+                                  Text(
+                                    '${restaurant.address}, ${restaurant.city}',
+                                    style: Theme.of(
+                                      context,
+                                    ).textTheme.labelLarge!,
+                                  ),
+                                ],
+                              ),
                               Row(
                                 children: [
                                   Icon(Icons.star, size: 14),
@@ -118,19 +144,6 @@ class _DetailScreenState extends State<DetailScreen> {
                                     ).textTheme.bodyMedium!,
                                   ),
                                 ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 12),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 12),
-                          child: Row(
-                            children: [
-                              Icon(Icons.location_pin, size: 16),
-                              Text(
-                                '${restaurant.address}, ${restaurant.city}',
-                                style: Theme.of(context).textTheme.labelLarge!,
                               ),
                             ],
                           ),
