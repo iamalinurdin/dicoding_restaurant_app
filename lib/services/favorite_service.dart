@@ -51,4 +51,11 @@ class FavoriteService {
 
     return result.toString();
   }
+
+  Future<bool> isFavorited(String id) async {
+    final db = await _initializeDB();
+    final result = await db.query(_table, where: 'id = ?', whereArgs: [id]);
+
+    return result.isNotEmpty;
+  }
 }
