@@ -30,7 +30,24 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
           Consumer<FavoriteProvider>(
             builder: (context, value, child) {
               if (value.favorites == null) {
-                return SliverFillRemaining(child: Text('empty'));
+                return SliverFillRemaining(child: SizedBox());
+              }
+
+              if (value.favorites!.isEmpty) {
+                return SliverFillRemaining(
+                  child: Column(
+                    crossAxisAlignment: .center,
+                    mainAxisAlignment: .center,
+                    children: [
+                      Icon(Icons.warning_rounded, size: 40),
+                      Text(
+                        "You don't have any favorite restaurants list",
+                        textAlign: .center,
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                    ],
+                  ),
+                );
               }
 
               return SliverList.builder(
