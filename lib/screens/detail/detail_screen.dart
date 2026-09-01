@@ -201,7 +201,7 @@ class _DetailScreenState extends State<DetailScreen> {
                             child: Text('Add Review'),
                           ),
                         ),
-                        SizedBox(height: 50),
+                        SizedBox(height: 150),
                       ],
                     ),
                   ],
@@ -211,6 +211,12 @@ class _DetailScreenState extends State<DetailScreen> {
           };
         },
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {},
+        label: Text('Add to Favorite'),
+        icon: Icon(Icons.favorite),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
