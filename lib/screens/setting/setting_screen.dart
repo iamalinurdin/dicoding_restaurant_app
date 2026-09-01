@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurant_app/providers/main/notification_provider.dart';
 import 'package:restaurant_app/providers/main/theme_provider.dart';
+import 'package:restaurant_app/widgets/sliver_header.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -10,41 +12,57 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-  // bool _isDarkMode = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: SafeArea(
-          child: Column(
+      body: CustomScrollView(
+        slivers: [
+          SliverHeader(),
+          SliverList.list(
             children: [
-              Row(
-                mainAxisAlignment: .spaceBetween,
-                children: [
-                  Text(
-                    'Light Mode',
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  Switch(
-                    // value: _isDarkMode,
-                    value: context.watch<ThemeProvider>().isDarkMode,
-                    onChanged: (value) {
-                      // print(value);
-                      // setState(() {
-                      //   _isDarkMode = value;
-                      // });
-
-                      // print(_isDarkMode);
-                      context.read<ThemeProvider>().toggleTheme(value);
-                    },
-                  ),
-                ],
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  mainAxisAlignment: .spaceBetween,
+                  children: [
+                    Text(
+                      'Light Mode',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    Switch(
+                      value: context.watch<ThemeProvider>().isDarkMode,
+                      onChanged: (value) {
+                        context.read<ThemeProvider>().toggleTheme(value);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  mainAxisAlignment: .spaceBetween,
+                  children: [
+                    Text(
+                      'Daily Reminder ${context.watch<NotificationProvider>().dailyReminder ? 'active' : 'not active'}',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    Switch(
+                      value: context
+                          .watch<NotificationProvider>()
+                          .dailyReminder,
+                      onChanged: (value) {
+                        context
+                            .read<NotificationProvider>()
+                            .toggleDailyReminder(value);
+                      },
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
-        ),
+        ],
       ),
     );
   }
