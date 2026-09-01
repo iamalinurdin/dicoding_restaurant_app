@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/models/restaurant_detail.dart';
 import 'package:restaurant_app/providers/detail/restaurant_detail_provider.dart';
+import 'package:restaurant_app/providers/favorite/favorite_provider.dart';
 import 'package:restaurant_app/screens/detail/menu_item_list.dart';
 import 'package:restaurant_app/screens/detail/review_item.dart';
 import 'package:restaurant_app/static/restaurant_detail_result_state.dart';
@@ -211,12 +212,6 @@ class _DetailScreenState extends State<DetailScreen> {
           };
         },
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
-        label: Text('Add to Favorite'),
-        icon: Icon(Icons.favorite),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
