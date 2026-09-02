@@ -26,7 +26,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   mainAxisAlignment: .spaceBetween,
                   children: [
                     Text(
-                      'Light Mode',
+                      'Dark Mode',
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     Switch(
@@ -44,7 +44,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   mainAxisAlignment: .spaceBetween,
                   children: [
                     Text(
-                      'Daily Reminder ${context.watch<NotificationProvider>().dailyReminder ? 'active' : 'not active'}',
+                      'Daily Reminder',
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     Switch(

@@ -6,11 +6,13 @@ import 'package:restaurant_app/providers/detail/restaurant_detail_provider.dart'
 import 'package:restaurant_app/providers/favorite/favorite_provider.dart';
 import 'package:restaurant_app/providers/home/restaurants_list_provider.dart';
 import 'package:restaurant_app/providers/main/index_nav_provider.dart';
+import 'package:restaurant_app/providers/main/notification_provider.dart';
 import 'package:restaurant_app/providers/main/theme_provider.dart';
 import 'package:restaurant_app/screens/add_review/add_review_screen.dart';
 import 'package:restaurant_app/screens/detail/detail_screen.dart';
 import 'package:restaurant_app/screens/main/main_screen.dart';
 import 'package:restaurant_app/services/favorite_service.dart';
+import 'package:restaurant_app/services/notification_service.dart';
 import 'package:restaurant_app/style/theme/ui_theme.dart';
 
 void main() async {
@@ -22,10 +24,21 @@ void main() async {
         // services
         Provider(create: (context) => ApiService()),
         Provider(create: (context) => FavoriteService()),
+        Provider(
+          create: (context) => NotificationService()
+            ..init()
+            ..configureLocalTimezone(),
+        ),
         // providers
         ChangeNotifierProvider(create: (context) => IndexNavProvider()),
         ChangeNotifierProvider(
           create: (context) => ThemeProvider()..loadTheme(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) =>
+              NotificationProvider(context.read<NotificationService>())
+                ..getDailyReminder()
+                ..requestPermission(),
         ),
         ChangeNotifierProvider(
           create: (context) =>
