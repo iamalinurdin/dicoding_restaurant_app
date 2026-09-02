@@ -26,7 +26,12 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverHeader(),
+          SliverHeader(
+            minHeight: 150,
+            maxHeight: 175,
+            title: 'Restaurants',
+            description: 'Recommendation restaurants for you.',
+          ),
           Consumer<RestaurantsListProvider>(
             builder: (context, value, child) {
               return switch (value.resultState) {

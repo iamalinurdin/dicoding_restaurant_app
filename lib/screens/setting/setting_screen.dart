@@ -17,7 +17,7 @@ class _SettingScreenState extends State<SettingScreen> {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverHeader(),
+          SliverHeader(maxHeight: 125, minHeight: 125, title: 'Setting'),
           SliverList.list(
             children: [
               Padding(

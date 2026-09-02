@@ -26,7 +26,12 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverHeader(),
+          SliverHeader(
+            minHeight: 150,
+            maxHeight: 175,
+            title: 'Favorites',
+            description: 'List your favorite restaurants.',
+          ),
           Consumer<FavoriteProvider>(
             builder: (context, value, child) {
               if (value.favorites == null) {
