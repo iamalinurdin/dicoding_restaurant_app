@@ -103,10 +103,17 @@ class _DetailScreenState extends State<DetailScreen> {
                             mainAxisAlignment: .spaceBetween,
                             crossAxisAlignment: .center,
                             children: [
-                              Text(
-                                restaurant.name,
-                                style: Theme.of(context).textTheme.titleLarge!
-                                    .copyWith(fontWeight: .w600, fontSize: 30),
+                              Flexible(
+                                child: Text(
+                                  restaurant.name,
+                                  style: Theme.of(context).textTheme.titleLarge!
+                                      .copyWith(
+                                        fontWeight: .w600,
+                                        fontSize: 30,
+                                      ),
+                                  maxLines: 3,
+                                  overflow: .ellipsis,
+                                ),
                               ),
                               FavoriteButton(restaurant: restaurant),
                             ],

@@ -25,8 +25,8 @@ class RestaurantDetailProvider extends ChangeNotifier {
         _resultState = RestaurantDetailLoadedState(result.restaurant);
         notifyListeners();
       }
-    } on Exception catch (e) {
-      _resultState = RestaurantDetailErrorState(e.toString());
+    } on Exception catch (_) {
+      _resultState = RestaurantDetailErrorState('failed to fetch restaurant');
       notifyListeners();
     }
   }

@@ -34,11 +34,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
           ),
           Consumer<FavoriteProvider>(
             builder: (context, value, child) {
-              if (value.favorites == null) {
-                return SliverFillRemaining(child: SizedBox());
-              }
-
-              if (value.favorites!.isEmpty) {
+              if (value.favorites.isEmpty) {
                 return SliverFillRemaining(
                   child: Column(
                     crossAxisAlignment: .center,
@@ -56,9 +52,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
               }
 
               return SliverList.builder(
-                itemCount: value.favorites!.length,
+                itemCount: value.favorites.length,
                 itemBuilder: (context, index) {
-                  final favorite = value.favorites![index];
+                  final favorite = value.favorites[index];
                   return FavoriteItemList(
                     favorite: favorite,
                     onTap: () {
