@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/models/restaurant_detail.dart';
-import 'package:restaurant_app/data/models/restaurant_favorites_list.dart';
 import 'package:restaurant_app/providers/detail/restaurant_detail_provider.dart';
-import 'package:restaurant_app/providers/favorite/favorite_provider.dart';
+import 'package:restaurant_app/screens/detail/favorite_button.dart';
 import 'package:restaurant_app/screens/detail/menu_item_list.dart';
 import 'package:restaurant_app/screens/detail/review_item.dart';
 import 'package:restaurant_app/static/restaurant_detail_result_state.dart';
@@ -109,34 +108,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                 style: Theme.of(context).textTheme.titleLarge!
                                     .copyWith(fontWeight: .w600, fontSize: 30),
                               ),
-                              IconButton.outlined(
-                                onPressed: () {
-                                  final favorite = RestaurantFavoritesList(
-                                    city: restaurant.city,
-                                    id: restaurant.id,
-                                    image:
-                                        "https://restaurant-api.dicoding.dev/images/large/${restaurant.pictureId}",
-                                    name: restaurant.name,
-                                    rating: restaurant.rating,
-                                  );
-                                  context.read<FavoriteProvider>().addFavorite(
-                                    favorite,
-                                  );
-
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        context
-                                            .read<FavoriteProvider>()
-                                            .message,
-                                      ),
-                                    ),
-                                  );
-                                },
-                                icon: Icon(Icons.favorite),
-                                iconSize: 20,
-                                padding: .all(8),
-                              ),
+                              FavoriteButton(restaurant: restaurant),
                             ],
                           ),
                         ),
@@ -251,6 +223,36 @@ class _DetailScreenState extends State<DetailScreen> {
     );
   }
 }
+
+// class FavoriteButton extends StatelessWidget {
+//   const FavoriteButton({super.key, required this.restaurant});
+
+//   final RestaurantDetail restaurant;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return IconButton.outlined(
+//       onPressed: () {
+//         final favorite = RestaurantFavoritesList(
+//           city: restaurant.city,
+//           id: restaurant.id,
+//           image:
+//               "https://restaurant-api.dicoding.dev/images/large/${restaurant.pictureId}",
+//           name: restaurant.name,
+//           rating: restaurant.rating,
+//         );
+//         context.read<FavoriteProvider>().addFavorite(favorite);
+
+//         ScaffoldMessenger.of(context).showSnackBar(
+//           SnackBar(content: Text(context.read<FavoriteProvider>().message)),
+//         );
+//       },
+//       icon: Icon(Icons.favorite),
+//       iconSize: 20,
+//       padding: .all(8),
+//     );
+//   }
+// }
 
 class MenusListView extends StatelessWidget {
   const MenusListView({super.key, required this.restaurant});

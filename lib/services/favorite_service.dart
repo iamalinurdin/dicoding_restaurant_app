@@ -32,7 +32,7 @@ class FavoriteService {
     final id = await db.insert(
       _table,
       payload,
-      conflictAlgorithm: ConflictAlgorithm.replace,
+      conflictAlgorithm: ConflictAlgorithm.fail,
     );
 
     return id.toString();

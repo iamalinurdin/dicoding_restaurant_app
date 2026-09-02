@@ -18,28 +18,29 @@ class FavoriteProvider extends ChangeNotifier {
       final result = await _service.insertItem(favorite);
       final isError = result == '';
 
+      debugPrint(result);
+
       if (isError) {
         _message = 'failed add new favorite restaurant';
-        notifyListeners();
       } else {
         _message = 'success add new favorite restaurant';
-        notifyListeners();
       }
     } catch (e) {
-      _message = 'error: ${e.toString()}';
-      notifyListeners();
+      _message = 'failed add new favorite restaurant';
     }
+
+    notifyListeners();
   }
 
   Future<void> getFavorites() async {
     try {
       _favorites = await _service.getAllItems();
       _message = 'all favorites data are loaded';
-      notifyListeners();
     } catch (e) {
-      _message = 'error: ${e.toString()}';
-      notifyListeners();
+      _message = 'failed to load favorite restaurants';
     }
+
+    notifyListeners();
   }
 
   Future<void> removeFavorite(String id) async {
@@ -47,10 +48,10 @@ class FavoriteProvider extends ChangeNotifier {
       await _service.removeItem(id);
       _message = 'your favorite is removed';
       _favorites = await _service.getAllItems();
-      notifyListeners();
     } catch (e) {
-      _message = 'error: ${e.toString()}';
-      notifyListeners();
+      _message = 'failed to remove favorite restaurant';
     }
+
+    notifyListeners();
   }
 }

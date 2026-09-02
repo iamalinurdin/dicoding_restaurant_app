@@ -18,14 +18,21 @@ class FavoriteItemList extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Dismissible(
+        direction: .endToStart,
+        background: Container(
+          color: Colors.red,
+          alignment: Alignment.centerRight,
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: const Icon(Icons.delete, color: Colors.white, size: 28),
+        ),
         key: Key(favorite.id),
         onDismissed: (direction) {
           final favoriteProvider = context.read<FavoriteProvider>();
           favoriteProvider.removeFavorite(favorite.id);
 
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text(favoriteProvider.message)));
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('favorite restaurant has been removed')),
+          );
         },
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
